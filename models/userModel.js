@@ -20,7 +20,12 @@ const userSchema = mongoose.Schema({
     });
 
 
+<<<<<<< HEAD
 
 module.exports = mongoose.model("User", userSchema);
 
 
+=======
+module.exports = mongoose.model("User",userSchema);
+module.exports= mongoose.model("User",userSchema);
+>>>>>>> 746e91e (fix)
