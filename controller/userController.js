@@ -56,7 +56,9 @@ const loginUser = asyncHandler(async (req, res) => {
 
     if (user && (await bcrypt.compare(password, user.password))) {
         const accessToken = jwt.sign(
+
             {
+                exp: Math.floor(Date.now() / 1000) + (60 * 60),
                 user: {
                     username: user.username,
                     email: user.email,
@@ -64,9 +66,10 @@ const loginUser = asyncHandler(async (req, res) => {
                 },
             },
             process.env.ACCESS_TOKEN_SECRET,
-            { expiresIn: '1m' }
+            // { expiresIn: '1m' }
+
         )
-        res.status(201).json({ token: accessToken,userId:user.id,email:user.email });
+        res.status(201).json({ token: accessToken, userId: user.id, email: user.email });
     } else {
         res.status(401)
         throw new Error("email or password not valid")
@@ -78,7 +81,7 @@ const loginUser = asyncHandler(async (req, res) => {
 // @access Public
 
 const currentUser = asyncHandler(async (req, res) => {
-    res.json({ message: "login the user" })
+    res.json(req.user)
 })
 
 module.exports = { registerUser, loginUser, currentUser }
