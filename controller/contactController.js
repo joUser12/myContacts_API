@@ -50,9 +50,9 @@ const createContact = asyncHandler(async (req, res) => {
 // @access private
 
 const updateContact = asyncHandler(async (req, res) => {
-    console.log(req.params)
+    console.log(req.params.id)
     const contact = await Contact.findById(req.params.id);
-    console.log(req.body)
+    console.log(contact.user._id.toString()!==req.user.id)
     if (!contact) {
         throw new Error("Contact not found")
     }
