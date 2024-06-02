@@ -31,15 +31,15 @@ const getContact = asyncHandler(async (req, res) => {
 // @access private
 
 const createContact = asyncHandler(async (req, res) => {
-    const { name, email, phone } = req.body;
-    if (!name || !email || !phone) {
+    const { name, email, phone,imageUrl } = req.body;
+    if (!name || !email || !phone || !imageUrl ) {
         res.status(400);
         throw new Error("All files are mandatory");
     }
 
     const contact = await Contact.create(
         {
-            name, email, phone,user_id:req.user.id
+            name, email, phone,user_id:req.user.id,imageUrl
         })
     res.status(201).json(contact)
 })

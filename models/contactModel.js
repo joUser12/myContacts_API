@@ -18,6 +18,10 @@ const contactSchema = mongoose.Schema({
     phone: {
         type: String,
         required: [true, "please add the contact phone"]
+    },
+    imageUrl:{
+        type:String,
+        required: [true, "please add image url"]
     }
 }
     , {
